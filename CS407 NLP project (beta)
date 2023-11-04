@@ -1,0 +1,41 @@
+this code demonstrates how to train a machine learning model to categorize text into predefined classes and how to evaluate its performance.
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+
+# Step 1: Data Collection (Hypothetical dataset)
+data = {
+    'text': [
+        'This is a sports article about football.',
+        'The politics section covers the latest elections.',
+        'New technology breakthroughs are discussed here.',
+        'Entertainment news features celebrity gossip.',
+        'A soccer match took place yesterday.'
+    ],
+    'category': ['Sports', 'Politics', 'Technology', 'Entertainment', 'Sports']
+}
+
+df = pd.DataFrame(data)
+
+
+X_train, X_test, y_train, y_test = train_test_split(df['text'], df['category'], test_size=0.2, random_state=42)
+
+tfidf_vectorizer = TfidfVectorizer(max_features=1000)
+X_train_tfidf = tfidf_vectorizer.fit_transform(X_train)
+X_test_tfidf = tfidf_vectorizer.transform(X_test)
+
+clf = MultinomialNB()
+
+clf.fit(X_train_tfidf, y_train)
+
+y_pred = clf.predict(X_test_tfidf)
+
+classification_rep = classification_report(y_test, y_pred, zero_division=1)
+print("Classification Report:")
+print(classification_rep)
+
+print("Confusion Matrix:")
+print(confusion_matrix(y_test, y_pred))
