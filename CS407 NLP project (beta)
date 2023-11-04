@@ -6,7 +6,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
-# Step 1: Data Collection (Hypothetical dataset)
 data = {
     'text': [
         'This is a sports article about football.',
