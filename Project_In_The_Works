@@ -1,0 +1,59 @@
+Calculator code, this is very basic. I got help from Youtube but I am planning on adding an actual visual to make it like a real calculator on the calculator app.
+I was planning on making a data science project to analyze words/phrases in a data base. But I got super busy with finals but that will be my next project goals!
+
+def add(x, y):
+    return x + y
+
+def subtract(x, y):
+    return x - y
+
+def multiply(x, y):
+    return x * y
+
+def divide(x, y):
+    """returns 'None' if division by zero is attempted."""
+    if y == 0:
+        print("Error, try another calculation.")
+        return None
+    return x / y
+
+def get_number_input(prompt):
+    """Function to get a valid number input from the user."""
+    while True:
+        try:
+            return float(input(prompt))
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+def main():
+    print("Select operation:")
+    print("1 - Add")
+    print("2 - Subtract")
+    print("3 - Multiply")
+    print("4 - Divide")
+
+    while True:
+        choice = input("Enter choice (1/2/3/4): ")
+
+        if choice in ('1', '2', '3', '4'):
+            num1 = get_number_input("Enter first number: ")
+            num2 = get_number_input("Enter second number: ")
+
+            if choice == '1':
+                print(f"{num1} + {num2} = {add(num1, num2)}")
+            elif choice == '2':
+                print(f"{num1} - {num2} = {subtract(num1, num2)}")
+            elif choice == '3':
+                print(f"{num1} * {num2} = {multiply(num1, num2)}")
+            elif choice == '4':
+                result = divide(num1, num2)
+                if result is not None:
+                    print(f"{num1} / {num2} = {result}")
+
+            if input("Let's do next calculation? (yes/no): ").lower() != "yes":
+                break
+        else:
+            print("Invalid Input")
+
+if __name__ == "__main__":
+    main()
